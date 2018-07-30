@@ -3,7 +3,7 @@
 
 clear all;
 
-[fre,s11_m,s11_p,s21_m,s21_p,s12_m,s12_p,s22_m,s22_p]=textread('1.s2p','%f%f%f%f%f%f%f%f%f','headerlines',8);
+[fre,s11_m,s11_p,s21_m,s21_p,s12_m,s12_p,s22_m,s22_p]=textread('PART.s2p','%f%f%f%f%f%f%f%f%f','headerlines',8);
 
 % for i=1:800
 % if s11_p(i)<0
@@ -42,13 +42,13 @@ TEas21=TEaLs21p.*(cos(TEaRs21a)-1i*sin(TEaRs21a));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 Cv=3*10^8;
-wa=0.047549;%WR-90
+wa=0.02286;%WR-90
 kx=pi/wa;
 k0=2*pi*fre/Cv;
 ka=sqrt(k0.^2-kx^2);
-da=0.0196;%thick of the slab under test  被测量样品厚度
+da=0.00668;%thick of the slab under test  被测量样品厚度
 d1a=0; %length between slab with detector of S11 靠近port1的距离
-t14=0.0196;%1/4 wavelength waveguide thickness   
+t14=0.00968;%1/4 wavelength waveguide thickness   
 dta=t14-da; %length between slab with detector of S21   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ra=TEas11.*exp(-2i*d1a*ka);
@@ -214,8 +214,7 @@ title('Measured S-Parameter Magnitudes','Fontsize',14,'Fontname','Helvetica');
 xlabel('Frequency (GHz)','Fontsize',14,'Fontname','Helvetica');
 ylabel('dB','Fontsize',14,'Fontname','Helvetica');
 set(gca,'Fontsize',14,'Fontname','Helvetica');
-xlim([3.95 5.85]);
-saveas(gcf,'CastorOil_Type4_Sp_Mag_New.fig');
+xlim([8 12]);
 
 figure
 plot(fre/1e9,s11_p,'r',fre/1e9,s21_p,'b',fre/1e9,s12_p,'k',fre/1e9,s22_p,'g','Linewidth',1.7);grid
@@ -225,8 +224,7 @@ title('Measured S-Parameter Phases','Fontsize',14,'Fontname','Helvetica');
 xlabel('Frequency (GHz)','Fontsize',14,'Fontname','Helvetica');
 ylabel('degree','Fontsize',14,'Fontname','Helvetica');
 set(gca,'Fontsize',14,'Fontname','Helvetica');
-xlim([3.95 5.85]);
-saveas(gcf,'CastorOil_Type4_Sp_Ph_New.fig')
+xlim([8 12]);
 
 figure
 plot(fre/1e9,real(eeeea),'r',fre/1e9,imag(eeeea),'b','Linewidth',1.7);grid
@@ -235,8 +233,7 @@ legend('Re\{\epsilon\}','Im\{\epsilon\}');
 title('Extracted Permittivity','Fontsize',14,'Fontname','Helvetica');
 xlabel('Frequency (GHz)','Fontsize',14,'Fontname','Helvetica');
 set(gca,'Fontsize',14,'Fontname','Helvetica');
-xlim([3.95 5.85]);
-saveas(gcf,'CastorOil_Type4_Sp_E_New.fig')
+xlim([8 12]);
 
 figure
 plot(fre/1e9,real(uuuua),'r',fre/1e9,imag(uuuua),'b','Linewidth',1.7);grid
@@ -245,16 +242,14 @@ legend('Re\{\mu\}','Im\{\mu\}');
 title('Extracted Permeability','Fontsize',14,'Fontname','Helvetica');
 xlabel('Frequency (GHz)','Fontsize',14,'Fontname','Helvetica');
 set(gca,'Fontsize',14,'Fontname','Helvetica');
-xlim([3.95 5.85]);
-saveas(gcf,'CastorOil_Type4_Sp_U_New.fig')
+xlim([8 12]);
 
 figure
 plot(fre/1e9,imag(eeeea)./real(eeeea),'Linewidth',1.7);grid
 title('Calculated Dielectric Loss Tangent','Fontsize',14,'Fontname','Helvetica');
 xlabel('Frequency (GHz)','Fontsize',14,'Fontname','Helvetica');
 set(gca,'Fontsize',14,'Fontname','Helvetica');
-xlim([3.95 5.85]);
-saveas(gcf,'CastorOil_Type4_Sp_Loss_New.fig')
+xlim([8 12]);
 
 
 %Fit the extract ep and mu into a line using Least Squares Polynomial Fit
